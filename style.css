@@ -6,8 +6,8 @@ body {
 }
 
 @keyframes circleAnimation {
-    0% { radius: 900px; height: 900px; width: 900px; }
-    14% { radius: 900px; height: 900px; width: 900px; }
+    0% { radius: 3900px; height: 3900px; width: 3900px; }
+    14% { radius: 3900px; height: 3900px; width: 3900px; }
     28% { radius: 300px; height: 300px; width: 300px; }
     100% { radius: 300px; height: 300px; width: 300px; }
 }
@@ -21,7 +21,8 @@ body {
 
 @keyframes leftPaneAnimation {
     0% { opacity: 0; bottom: 0 }
-    14% { opacity: 0; bottom: 0 }
+    14% { bottom: 0 }
+    24% { opacity: 0; }
     28% { opacity: 1; bottom: 50% }
     42% { opacity: 1; bottom: 50% }
     56% { opacity: 0; bottom: 100% }
@@ -42,10 +43,10 @@ body {
     animation-fill-mode: both;
     animation-timing-function: ease-in-out;
     border-radius: 50%;
-    /*radius: 1900px;*/
-    radius: 900px;
-    height: 900px;
-    width: 900px;
+    radius: 3900px;
+    radius: 3900px;
+    height: 3900px;
+    width: 3900px;
     background-color: red;
     display: flex;
     justify-content: center;
