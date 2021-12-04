@@ -1,0 +1,82 @@
+body {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+@keyframes circleAnimation {
+    0% { radius: 900px; height: 900px; width: 900px; }
+    14% { radius: 900px; height: 900px; width: 900px; }
+    28% { radius: 300px; height: 300px; width: 300px; }
+    100% { radius: 300px; height: 300px; width: 300px; }
+}
+
+@keyframes headlineAnimation {
+    0% { opacity: 1 }
+    14% { opacity: 1 }
+    28% { opacity: 0 }
+    100% { opacity: 0 }
+}
+
+@keyframes leftPaneAnimation {
+    0% { opacity: 0; bottom: 0 }
+    14% { opacity: 0; bottom: 0 }
+    28% { opacity: 1; bottom: 50% }
+    42% { opacity: 1; bottom: 50% }
+    56% { opacity: 0; bottom: 100% }
+}
+
+@keyframes rightPaneAnimation {
+    0% { opacity: 0; bottom: 0 }
+    44% { opacity: 0; bottom: 0 }
+    58% { opacity: 1; bottom: 50% }
+    72% { opacity: 1; bottom: 50% }
+    86% { opacity: 1; bottom: 100% }
+    100% { opacity: 1; bottom: 100% }
+}
+
+#circleId {
+    animation: circleAnimation 14s infinite;
+    animation-direction: alternate;
+    animation-fill-mode: both;
+    border-radius: 50%;
+    /*radius: 1900px;*/
+    radius: 900px;
+    height: 900px;
+    width: 900px;
+    background-color: red;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#circleId h2 {
+    animation: headlineAnimation 14s infinite;
+    animation-direction: alternate;
+    animation-fill-mode: both;
+    color: white;
+    font-size: 64px;
+}
+
+#leftPane {
+    animation: leftPaneAnimation 14s infinite;
+    animation-direction: alternate;
+    animation-fill-mode: both;
+    opacity: 0;
+    position: fixed;
+    bottom: 0;
+    left: 10px;
+    width: 30%;
+}
+
+#rightPane {
+    animation: rightPaneAnimation 14s infinite;
+    animation-direction: alternate;
+    animation-fill-mode: both;
+    opacity: 0;
+    position: fixed;
+    right: 0;
+    width: 30%;
+    bottom: 0;
+}
