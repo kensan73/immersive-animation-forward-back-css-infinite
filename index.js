@@ -2,6 +2,8 @@ const circle = document.querySelector("#circleId");
 const headline = document.querySelector("#circleId > h2");
 const leftPane = document.querySelector("#leftPane");
 const rightPane = document.querySelector("#rightPane");
+const progressElement = document.querySelector("#progressId");
+const timeElement = document.querySelector("#timeId");
 
 const elements = [circle, headline, leftPane, rightPane];
 const elementClasses = [
@@ -12,20 +14,18 @@ const elementClasses = [
 ];
 
 let isPaused = false;
+let duration = 28000;
+let time = 0;
 
-window.addEventListener("keypress", (event) => {
-  if (event.key !== "p") return;
-
-  isPaused = !isPaused;
-
-  let animationPlayState = "running";
-  if (isPaused) {
-    animationPlayState = "paused";
-  }
-  for (let i = 0; i !== elements.length; i++) {
-    elements[i].style.animationPlayState = animationPlayState;
-  }
-});
+setInterval(() => {
+  progressElement.innerHTML = `${(
+    ((Date.now() - startTime) / duration) *
+    100
+  ).toPrecision(2)}%`;
+  console.log("setting timeel");
+  time = time + 500;
+  timeElement.innerHTML = `${(time / 1000).toPrecision(3)}s`;
+}, 500);
 
 window.addEventListener("keypress", ({ key }) => {
   if (key !== "r") return;
@@ -37,10 +37,10 @@ window.addEventListener("keypress", ({ key }) => {
   elements.forEach((element, index) => {
     element.classList.add(elementClasses[index]);
   });
+
   const elapsedMilliseconds = Date.now() - startTime;
-  console.log("elapsed: " + elapsedMilliseconds);
-  let delay = 14000 - elapsedMilliseconds;
-  console.log("delay: -" + delay + " ms");
+  let delay = duration - elapsedMilliseconds;
+  console.log("delay: -" + delay + "ms");
 
   elements.forEach((element) => {
     element.style.animationDelay = `-${delay}ms`;
@@ -49,13 +49,58 @@ window.addEventListener("keypress", ({ key }) => {
     element.style.animationPlayState = "running";
   });
 
-  console.log("now is " + Date.now());
+  // console.log("now is " + Date.now());
   startTime = Date.now() + delay;
+  console.log("startTime is " + startTime);
   clearInterval(handle);
   handle = setInterval(() => {
     startTime = Date.now();
-  }, 14 * 1000);
+  }, duration);
 });
+
+// window.addEventListener("keypress", (event) => {
+//   if (event.key !== "p") return;
+//
+//   isPaused = !isPaused;
+//
+//   let animationPlayState = "running";
+//   if (isPaused) {
+//     animationPlayState = "paused";
+//   }
+//   for (let i = 0; i !== elements.length; i++) {
+//     elements[i].style.animationPlayState = animationPlayState;
+//   }
+// });
+
+// window.addEventListener("keypress", ({ key }) => {
+//   if (key !== "r") return;
+//
+//   elements.forEach((element, index) => {
+//     element.classList.remove(elementClasses[index]);
+//   });
+//   void headline.offsetWidth;
+//   elements.forEach((element, index) => {
+//     element.classList.add(elementClasses[index]);
+//   });
+//
+//   const elapsedMilliseconds = Date.now() - startTime;
+//   let delay = 0;
+//
+//   elements.forEach((element) => {
+//     element.style.animationDelay = `${delay}ms`;
+//   });
+//   elements.forEach((element) => {
+//     element.style.animationPlayState = "running";
+//   });
+//
+//   // console.log("now is " + Date.now());
+//   startTime = Date.now() + delay;
+//   console.log("startTime is " + startTime);
+//   clearInterval(handle);
+//   handle = setInterval(() => {
+//     startTime = Date.now();
+//   }, duration);
+// });
 let forward = true;
 let handle = null;
 let startTime = Date.now();
@@ -65,7 +110,8 @@ headline.addEventListener(
     console.log("animation started 1");
     handle = setInterval(() => {
       startTime = Date.now();
-    }, 14 * 1000);
+      time = 0;
+    }, duration);
   },
   { once: true }
 );
